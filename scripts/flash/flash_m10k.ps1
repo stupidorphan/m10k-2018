@@ -266,8 +266,12 @@ $mapPath = Join-Path $PSScriptRoot '..\firmware\substitution_map.json'
 if (-not (Test-Path -LiteralPath $mapPath -PathType Leaf)) {
     throw "Firmware substitution table not found: $mapPath"
 }
-$mapValues = @(Get-Content -Raw -LiteralPath (Resolve-Path -LiteralPath $mapPath) |
-    ConvertFrom-Json | ForEach-Object { [Convert]::ToByte([int]$_) })
+$mapJson = Get-Content -Raw -LiteralPath (Resolve-Path -LiteralPath $mapPath) |
+    ConvertFrom-Json
+$mapValues = New-Object byte[] $mapJson.Count
+for ($mapIndex = 0; $mapIndex -lt $mapJson.Count; $mapIndex++) {
+    $mapValues[$mapIndex] = [Convert]::ToByte([int]$mapJson[$mapIndex])
+}
 if ($mapValues.Count -ne 256) {
     throw "Expected 256 substitution-table bytes, found $($mapValues.Count)."
 }
