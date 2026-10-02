@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gaomon-m10k-t17b-research"
+version = "0.1.0"
+description = "Reproducible research tools for the Gaomon M10K 2018 T17b firmware"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [{name = "Gaomon M10K T17b research contributors"}]
+dependencies = []
+
+[project.optional-dependencies]
+windows = ["pywin32>=306"]
+test = ["pytest>=8"]

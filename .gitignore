@@ -1,0 +1,67 @@
+# Local firmware inputs and generated candidates. The project records hashes
+# and build instructions; it does not redistribute vendor firmware by default.
+/firmware/input/*
+/firmware/build/*
+!/firmware/input/.gitkeep
+!/firmware/build/.gitkeep
+/firmware/backups/
+/captures/
+*.bin
+*_before_*
+
+# Investigation workspace and vendor/IDA artifacts from the original analysis.
+/outputs/
+/$cur/
+/$old/
+/work/
+
+# Python and Windows build/editor output.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.venv/
+venv/
+.env
+
+# IDA, debugger, and local analysis databases.
+*.id0
+*.id1
+*.id2
+*.nam
+*.til
+*.i64
+*.dmp
+
+# Logs, captures, and machine-specific inventories.
+*.log
+*.err
+interfaces.txt
+windows_ink_state_before.json
+
+# Vendor installers, drivers, certificates, archives, and screenshots.
+*.exe
+*.msi
+*.7z
+*.zip
+*.rar
+*.sys
+*.dll
+*.cat
+*.cer
+*.inf
+*.cdf
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.html
+*.pdb
+
+# OS/editor files.
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

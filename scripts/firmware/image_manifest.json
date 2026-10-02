@@ -1,0 +1,28 @@
+{
+  "model": "Gaomon M10K 2018 / OEM02 / T17b",
+  "application_base": "0x08004000",
+  "application_size": 34332,
+  "images": [
+    {
+      "id": "official-241030",
+      "kind": "vendor-input",
+      "status": "obtain locally; not redistributed",
+      "md5": "C42DF3D2456A0B9DB13C106665B8337F",
+      "sha256": "A63A31E79FE556EA2E481046C5A536B1080E6673D0A6628E7A8DEDA3D3819504"
+    },
+    {
+      "id": "max-safe-retrack-ep82-1ms",
+      "kind": "experimental-output",
+      "status": "observed on one unit; no guarantee",
+      "md5": "F51248806988808E3A71318217FEA43C",
+      "sha256": "F3728033BB43FD6D3B8B6B8076C67B832642B80E4FA40B5A75D4F05DA5DF1B2F"
+    },
+    {
+      "id": "balanced-retrack-ep82-1ms",
+      "kind": "experimental-output",
+      "status": "observed on one unit; produced parser-related phantom symptoms",
+      "md5": "A0C02FF3247A5432C2CE20EEFF6BEB77",
+      "sha256": "80DEA575ED96CD9B91970DB80F74649CA45369601F9DAF524DCA16BABE5EA8C4"
+    }
+  ]
+}
