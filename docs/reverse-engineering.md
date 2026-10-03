@@ -97,6 +97,25 @@ debug branches and skip two pressure-band resonance retracks that returned
 without producing a report. These changes reduce repeated work while keeping
 the five/seven/seven sampling topology.
 
+The remaining edits are short Thumb branches. This table uses decoded
+application offsets, before the vendor byte-substitution is reapplied:
+
+| File offset | Flash address | Original bytes | Patched bytes | Reason |
+| ---: | ---: | --- | --- | --- |
+| 0x0A76 | 0x08004A76 | 00 F0 | 00 E0 | Skip IRQ debug path |
+| 0x0C1E | 0x08004C1E | 62 78 | 30 E0 | Skip active-scan debug block |
+| 0x2FFA | 0x08006FFA | 06 A1 | 03 E0 | Skip frequency debug path |
+| 0x16D6 | 0x080056D6 | 72 B6 | 04 E0 | Skip barrel pressure-band retrack |
+| 0x1754 | 0x08005754 | 72 B6 | 04 E0 | Skip eraser pressure-band retrack |
+
+The pen endpoint interval is a separate one-byte change at file offset
+0x83D1: 02 to 01. The five wait changes replace the low immediate byte of
+each Thumb MOVS instruction at the addresses in the table above. The builders
+check the expected original bytes, changed offsets, decoded vector table, and
+expanded endpoint descriptor before creating an output image. The skipped
+pressure-band retracks should still be checked with barrel-button and eraser
+tests on any new hardware revision.
+
 The shorter 5/5/15/30/5 profile produced invalid coordinates and phantom
 events on the test unit. It is intentionally absent from the supported build
 profiles.

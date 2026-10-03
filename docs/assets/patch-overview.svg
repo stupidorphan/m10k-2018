@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 670" role="img" aria-labelledby="title desc">
+  <title id="title">Firmware changes used in the M10K 2018 report-rate experiments</title>
+  <desc id="desc">Three changes: endpoint 0x82 USB interrupt interval changed from 2 to 1 milliseconds; five conditional acquisition waits changed from 27, 20, 66, 120, 30 microseconds to 10, 10, 30, 60, 15 microseconds in the conservative profile or 7, 7, 20, 40, 10 in the balanced profile; three no-output debug paths and two redundant pressure retracks were skipped. Five resonance, seven Y, and seven X samples and the HID packet format remained unchanged. End-to-end latency was not measured.</desc>
+  <rect x="1" y="1" width="1038" height="668" rx="24" fill="#0b1423" stroke="#334155" stroke-width="2"/>
+  <text x="42" y="68" fill="#f8fafc" font-family="Segoe UI,Arial,sans-serif" font-size="30" font-weight="700">What changed in the firmware</text>
+  <text x="42" y="103" fill="#b7c5d8" font-family="Segoe UI,Arial,sans-serif" font-size="17">Three small patches reduce the host wait and scan work budget</text>
+
+  <rect x="38" y="139" width="305" height="383" rx="20" fill="#10253a" stroke="#35617b" stroke-width="2"/>
+  <text x="61" y="176" fill="#7dd3fc" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">01 / USB SCHEDULE</text>
+  <text x="61" y="213" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="23" font-weight="700">Endpoint 0x82</text>
+  <text x="61" y="244" fill="#aec2d6" font-family="Segoe UI,Arial,sans-serif" font-size="15">bInterval (pen/vendor IN)</text>
+  <text x="61" y="309" fill="#94a3b8" font-family="Segoe UI,Arial,sans-serif" font-size="31" font-weight="700">2 ms</text>
+  <path d="M159 298h48m-12-12 12 12-12 12" fill="none" stroke="#7dd3fc" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="225" y="309" fill="#e0f7ff" font-family="Segoe UI,Arial,sans-serif" font-size="31" font-weight="700">1 ms</text>
+  <line x1="61" y1="345" x2="320" y2="345" stroke="#35617b"/>
+  <text x="61" y="381" fill="#d7e8f2" font-family="Segoe UI,Arial,sans-serif" font-size="16">Host can request a report</text>
+  <text x="61" y="405" fill="#d7e8f2" font-family="Segoe UI,Arial,sans-serif" font-size="16">each USB full-speed frame.</text>
+  <text x="61" y="456" fill="#9fb0c6" font-family="Segoe UI,Arial,sans-serif" font-size="14">A scheduling ceiling, not a</text>
+  <text x="61" y="477" fill="#9fb0c6" font-family="Segoe UI,Arial,sans-serif" font-size="14">1000 Hz sensor scan.</text>
+
+  <rect x="367" y="139" width="306" height="383" rx="20" fill="#132b36" stroke="#397d76" stroke-width="2"/>
+  <text x="391" y="176" fill="#5eead4" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">02 / ANALOG ACQUISITION</text>
+  <text x="391" y="213" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="23" font-weight="700">Five SysTick waits</text>
+  <text x="391" y="252" fill="#9fb0c6" font-family="Segoe UI,Arial,sans-serif" font-size="14">Original (µs)</text>
+  <text x="391" y="282" fill="#e2e8f0" font-family="Consolas,monospace" font-size="20" font-weight="700">27/20/66/120/30</text>
+  <text x="391" y="325" fill="#9fb0c6" font-family="Segoe UI,Arial,sans-serif" font-size="14">Conservative (µs)</text>
+  <text x="391" y="355" fill="#5eead4" font-family="Consolas,monospace" font-size="20" font-weight="700">10/10/30/60/15</text>
+  <text x="391" y="398" fill="#9fb0c6" font-family="Segoe UI,Arial,sans-serif" font-size="14">Balanced (µs)</text>
+  <text x="391" y="428" fill="#c4b5fd" font-family="Consolas,monospace" font-size="20" font-weight="700">7/7/20/40/10</text>
+  <line x1="391" y1="450" x2="650" y2="450" stroke="#397d76"/>
+  <text x="391" y="477" fill="#afc6c4" font-family="Segoe UI,Arial,sans-serif" font-size="13">Calls are conditional and may repeat.</text>
+  <text x="391" y="496" fill="#afc6c4" font-family="Segoe UI,Arial,sans-serif" font-size="13">Values cannot be added as latency.</text>
+
+  <rect x="697" y="139" width="305" height="383" rx="20" fill="#291e40" stroke="#7c5ca6" stroke-width="2"/>
+  <text x="721" y="176" fill="#c4b5fd" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">03 / REPEATED WORK</text>
+  <text x="721" y="213" fill="#f1f5f9" font-family="Segoe UI,Arial,sans-serif" font-size="23" font-weight="700">Skip no-output paths</text>
+  <text x="721" y="269" fill="#d8cdea" font-family="Segoe UI,Arial,sans-serif" font-size="17">3 debug branches</text>
+  <text x="721" y="309" fill="#d8cdea" font-family="Segoe UI,Arial,sans-serif" font-size="17">2 pressure-band retracks</text>
+  <path d="M745 346v44m-12-12 12 12 12-12" fill="none" stroke="#c4b5fd" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="721" y="407" width="255" height="49" rx="12" fill="#4c326c"/>
+  <text x="849" y="438" text-anchor="middle" fill="#f5edff" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="700">Bypassed</text>
+  <text x="721" y="493" fill="#bdaed1" font-family="Segoe UI,Arial,sans-serif" font-size="14">Scan loop performs less work.</text>
+
+  <rect x="38" y="547" width="964" height="88" rx="17" fill="#17253b" stroke="#3c4e69"/>
+  <text x="61" y="578" fill="#f8fafc" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="700">UNCHANGED</text>
+  <text x="205" y="578" fill="#d2dfed" font-family="Segoe UI,Arial,sans-serif" font-size="16">5 resonance samples  •  7 Y samples  •  7 X samples  •  HID packet format</text>
+  <text x="61" y="611" fill="#a9bad0" font-family="Segoe UI,Arial,sans-serif" font-size="14">These patches shorten internal waits and report spacing. Pen-to-screen input latency was not measured.</text>
+</svg>

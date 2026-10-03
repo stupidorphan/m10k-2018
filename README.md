@@ -9,6 +9,16 @@ GD32 DFU interface was read and written, and how small binary patches affected
 the measured report rate. It does not claim an official firmware, a universal
 700 Hz mode, or a guaranteed fix for phantom input.
 
+**Up to ~2.2× the observed report rate:** the experimental balanced image
+reached about 350 reports/s in OpenTabletDriver versus the user's initial
+~160 reports/s baseline on the original Gaomon firmware. The balanced image
+was later reverted after phantom-input symptoms. The conservative image reached
+about 312 reports/s in its best reported run (about **2.0×** the baseline).
+These results came from one tablet across separate runs and are not a
+controlled benchmark of the stock 241030 image.
+
+![Observed report rates on one M10K 2018: initial baseline about 160 Hz, conservative profile 237 to 312 Hz, and experimental balanced profile 312 to 350 Hz. The peak is about 2.2 times the initial baseline.](docs/assets/report-rates.svg)
+
 ## Results at a glance
 
 * The official application image is 34,332 bytes and loads at flash address
@@ -30,6 +40,34 @@ the measured report rate. It does not claim an official firmware, a universal
   zero-pressure packets that OpenTabletDriver's UCLogic parser classified as
   normal tablet reports. This needs a host-side fix investigation and
   controlled stock-versus-patched testing.
+
+## What changed in the firmware
+
+![Patch overview: EP82 USB interval changed from 2 to 1 ms; five analog wait instructions were shortened; three no-output debug paths and two redundant pressure retracks were skipped. The five resonance, seven Y, and seven X samples and HID report format stayed unchanged.](docs/assets/patch-overview.svg)
+
+The patch combines three changes:
+
+1. **USB report opportunity:** endpoint 0x82's interrupt interval
+   (bInterval) changed from 2 ms to 1 ms. This lets the USB host ask for a
+   report every full-speed frame, but it does not make the tablet sample at
+   1000 Hz.
+2. **Shorter acquisition waits:** five SysTick waits in the sensor path changed
+   from 27/20/66/120/30 µs to 10/10/30/60/15 µs in the conservative
+   profile or 7/7/20/40/10 µs in the balanced profile. These waits occur
+   conditionally and can repeat during a scan; their values cannot simply be
+   summed into an input-latency figure.
+3. **Less repeated work:** three confirmed no-output debug branches and two
+   redundant pressure-band resonance retracks are skipped. The five resonance
+   samples, seven Y samples, seven X samples, peak searches, and HID report
+   format are unchanged.
+
+The observed rates correspond to nominal intervals of about **6.25 ms** at
+160 Hz, **3.21 ms** at 312 Hz, and **2.86 ms** at 350 Hz. The 350 Hz interval
+is about 54% shorter than the baseline interval. **End-to-end pen-to-screen
+input delay was not measured**, so this is a report-spacing comparison rather
+than a latency claim. Exact patch addresses and hashes are in
+[the reverse-engineering notes](docs/reverse-engineering.md) and
+[the experiment history](docs/experiments.md).
 
 ## Safety
 

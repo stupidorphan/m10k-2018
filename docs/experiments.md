@@ -6,10 +6,11 @@ guarantees for other tablets, firmware revisions, USB hosts, or applications.
 
 | Profile | Firmware changes | Observed result | Status |
 | --- | --- | --- | --- |
-| Official 241030 | Stock 2 ms EP82; 27/20/66/120/30 us waits | Around 160 Hz baseline in the original setup | Recovery input; hash in manifest |
+| Initial Gaomon firmware (190119) | User-reported baseline before the 241030 experiments | Around 160 Hz in the original setup | Baseline observation; not a controlled 241030 comparison |
+| Official 241030 image | Stock 2 ms EP82; 27/20/66/120/30 us waits | Not measured as an isolated stock benchmark | Recovery input; hash in manifest |
 | Aggressive | 1 ms EP82; 5/5/15/30/5 us waits | Invalid coordinates, clicks, and phantom movement | Rejected |
 | Conservative retrack-skip | 1 ms EP82; 10/10/30/60/15 us waits; debug and redundant retrack skips | Roughly 237–312 Hz across runs | Last verified recovery image |
-| Balanced retrack-skip | 1 ms EP82; 7/7/20/40/10 us waits; same skips | Roughly 312–350 Hz across runs | Experimental; restored |
+| Balanced retrack-skip | 1 ms EP82; 7/7/20/40/10 us waits; same skips | Roughly 312–350 Hz across runs | Experimental; later reverted to the conservative image |
 | No-pen guard diagnostic | Balanced image plus a no-pen branch change at 0x0800C0C4 | Temporary diagnostic; not a validated fix | Flashed temporarily, then reverted |
 
 ## Hashes
@@ -30,6 +31,13 @@ official vendor input is 34,332 bytes:
 
 The binary files are deliberately excluded from Git. They can be rebuilt from
 the official image or kept in a private recovery archive.
+
+The highest observed ratio is about 350 / 160 = 2.19, rounded to **2.2×**.
+The conservative profile's best reported run gives 312 / 160 = 1.95, rounded
+to **2.0×**. These ratios compare separate runs and different firmware
+revisions. At 160, 312, and 350 Hz, the calculated mean time between reports
+is 6.25, 3.21, and 2.86 ms respectively; these are not direct measurements
+of pen-to-screen latency.
 
 ## Reversion record
 
